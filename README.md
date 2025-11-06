@@ -119,7 +119,7 @@ El flujo de la aplicación se centra en la consulta y presentación de datos:
             <img src="scrapbook/Detalle.png" alt="Detalle de usuarios" width="200"/>
         </td>
         <td align="center">
-            <img src="scrapbook/perasconmanzanas.png" alt="Landing" width="200"/>
+            <img src="scrapbook/PERASCONMANZANAS.png" alt="Landing" width="200"/>
         </td>
     </tr>
     <tr>
