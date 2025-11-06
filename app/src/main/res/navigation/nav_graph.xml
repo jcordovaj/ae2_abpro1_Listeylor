@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.mod6.ae2_abpro1_listeylor.presentation.SplashFragment"
+        android:label="Splash"
+        tools:layout="@layout/splash_fragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_usersListFragment"
+            app:destination="@id/usersListFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/usersListFragment"
+        android:name="com.mod6.ae2_abpro1_listeylor.presentation.UsersListFragment"
+        android:label="Lista de Usuarios"
+        tools:layout="@layout/users_list_fragment" >
+        <action
+            android:id="@+id/action_usersListFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.mod6.ae2_abpro1_listeylor.presentation.UserDetailFragment"
+        android:label="Detalle de Usuario"
+        tools:layout="@layout/user_detail_fragment">
+        <argument
+            android:name="user"
+            app:argType="com.mod6.ae2_abpro1_listeylor.data.model.User" />
+    </fragment>
+</navigation>

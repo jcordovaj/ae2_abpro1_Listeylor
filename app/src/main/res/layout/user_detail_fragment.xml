@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_primary"
+                android:text="Nombre del Usuario"/>
+
+            <TextView
+                android:id="@+id/tv_detail_id_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/darker_gray"
+                android:text="ID: 1 | Usuario: Papecortisona"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contacto"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_email_24"
+                android:drawablePadding="8dp"
+                android:text="Correo: pepe.cortisona@pelotillehue.biz"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_phone_24"
+                android:drawablePadding="8dp"
+                android:text="Teléfono: +56-911-111-111"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_web_24"
+                android:drawablePadding="8dp"
+                android:text="Web: pelotillehue.biz"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dirección"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_address_street_suite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calle: Av. Siempreviva 1234"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_address_city_zip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ciudad y Código Postal: Pelotillehue, 750000"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Compañía"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_business_24"
+                android:drawablePadding="8dp"
+                android:text="Nombre: Condorito Ltda."/>
+
+            <!-- Marca de Agua Logo "Peras con Manzanas" -->
+            <ImageView
+                android:id="@+id/imageViewWatermark"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.7"
+                android:src="@drawable/perasconmanzanas_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</ScrollView>
