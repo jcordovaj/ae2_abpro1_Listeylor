@@ -15,7 +15,7 @@ class UserAdapter(private val onClick: (User) -> Unit) :
     private var users: List<User> = emptyList()
 
     fun submitList(newUsers: List<User>) {
-        users = newUsers.sortedBy { it.id } // Requerimiento: ordenar por ID
+        users = newUsers.sortedBy { it.id } // Ordena por ID
         notifyDataSetChanged()
     }
 
@@ -32,17 +32,18 @@ class UserAdapter(private val onClick: (User) -> Unit) :
     override fun getItemCount() = users.size
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvId: TextView = itemView.findViewById(R.id.tv_user_id)
-        private val tvName: TextView = itemView.findViewById(R.id.tv_user_name)
-        private val tvEmail: TextView = itemView.findViewById(R.id.tv_user_email)
+        private val tvId         : TextView  = itemView.findViewById(R.id.tv_user_id)
+        private val tvName       : TextView  = itemView.findViewById(R.id.tv_user_name)
+        private val tvEmail      : TextView  = itemView.findViewById(R.id.tv_user_email)
         private val ivPlaceholder: ImageView = itemView.findViewById(R.id.iv_user_placeholder)
 
         fun bind(user: User) {
-            tvId.text = "ID: ${user.id}"
-            tvName.text = user.name
+            tvId.text    = "ID: ${user.id}"
+            tvName.text  = user.name
             tvEmail.text = user.email
 
-            // Placeholder para la imagen (actualmente estático)
+            // Placeholder para la imagen (actualmente estático con ícono Peras con Manzanas)
+            // Se dejó el diseño para agregar, eventualmente, en otra etapa
             ivPlaceholder.setImageResource(R.drawable.user_placeholder)
 
             itemView.setOnClickListener {

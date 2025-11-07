@@ -20,11 +20,10 @@ class UsersListFragment : Fragment(R.layout.users_list_fragment) {
     private val binding get() = _binding!!
     private lateinit var userAdapter: UserAdapter
 
-    // Inicialización simplificada del ViewModel (en un entorno real usaríamos Hilt/Koin)
     private val viewModel: UserViewModel by viewModels {
-        val userService = RetrofitClient.userService // Asume RetrofitClient está configurado
+        val userService = RetrofitClient.userService
         val repository = UserRepository(userService)
-        UserViewModelFactory(repository) // Necesitas crear esta Factory
+        UserViewModelFactory(repository)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,8 +36,8 @@ class UsersListFragment : Fragment(R.layout.users_list_fragment) {
 
     private fun setupRecyclerView() {
         userAdapter = UserAdapter { user ->
-            // Navegar al detalle pasando el objeto User
-            val action = UsersListFragmentDirections.actionUsersListFragmentToUserDetailFragment(user)
+            val action = UsersListFragmentDirections.
+            actionUsersListFragmentToUserDetailFragment(user)
             findNavController().navigate(action)
         }
         binding.rvUsers.adapter = userAdapter

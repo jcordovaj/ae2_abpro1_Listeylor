@@ -5,7 +5,7 @@ import com.mod6.ae2_abpro1_listeylor.data.model.NetworkResult
 import com.mod6.ae2_abpro1_listeylor.data.model.User
 
 class UserRepository(private val userService: UserService) {
-    // Función que obtiene la lista de usuarios y maneja errores
+    // Obtiene la lista de usuarios y maneja errores
     suspend fun getUsers(): NetworkResult<List<User>> {
         return try {
             val response = userService.getUsers()

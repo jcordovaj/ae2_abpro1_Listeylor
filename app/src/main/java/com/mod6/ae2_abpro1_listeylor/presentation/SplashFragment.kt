@@ -17,7 +17,6 @@ class SplashFragment : Fragment(R.layout.splash_fragment) {
         _binding = SplashFragmentBinding.bind(view)
 
         binding.btnContinue.setOnClickListener {
-            // Navega usando la acción definida en nav_graph.xml
             val action = SplashFragmentDirections.actionSplashFragmentToUsersListFragment()
             findNavController().navigate(action)
         }

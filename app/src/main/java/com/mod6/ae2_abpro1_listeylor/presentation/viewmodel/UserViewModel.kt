@@ -15,15 +15,15 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     val userList: LiveData<NetworkResult<List<User>>> = _userList
 
     init {
-        fetchUsers() // Llamar al obtener datos al iniciar el ViewModel
+        fetchUsers() // Obtener datos al iniciar el ViewModel
     }
 
     private fun fetchUsers() {
-        _userList.value = NetworkResult.Loading // Mostrar estado de carga
+        _userList.value = NetworkResult.Loading // Muestra estado de carga
 
         viewModelScope.launch {
             val result = repository.getUsers()
-            _userList.postValue(result) // Actualizar el LiveData con el resultado
+            _userList.postValue(result) // Actualiza el LiveData con el resultado
         }
     }
 }

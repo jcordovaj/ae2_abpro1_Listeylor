@@ -15,19 +15,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Configurar la barra de acción superior (App Bar)
+        // Configura la barra de acción superior (App Bar)
         supportActionBar?.title = "Listeylor"
 
-        // Configurar Navigation Component
+        // Configura Navigation Component
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        // Configurar el menú inferior (BottomNavigationView)
+        // Configura el menú inferior (BottomNavigationView)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         bottomNav.setupWithNavController(navController)
 
-        // Configurar el botón de 'Regresar' en el menú inferior
+        // Configura el botón de 'Regresar' en el menú inferior
         bottomNav.menu.findItem(R.id.action_back).setOnMenuItemClickListener {
             navController.navigateUp() // Simula el botón de atrás
             true
