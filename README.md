@@ -1,4 +1,4 @@
-# 🚀 MOD6 AE2-ABPRO1: Sistema de Consultas de Personal "Listeylor" (MVVM + ApiRest + Retrofit)
+# 🚀 MOD6 AE2-ABPRO1 + AE3-ABP1: Sistema de Consultas de Personal "Listeylor" (MVVM + ApiRest + Retrofit + Testing )
 
 <p float="center">
   <img src="scrapbook/perasconmanzanas_icon.png" alt="Logo" width="200"/>
@@ -24,12 +24,11 @@ Aplicación nativa para Android, desarrollada en Kotlin, diseñada para funciona
 
 Se implementa el patrón MVVM (Model-View-ViewModel) para garantizar una arquitectura limpia y se utilizan componentes de Android Jetpack para la estructura y reactividad.
 
-1. Modelo (`Model`) y Acceso a Datos (`Retrofit`)
-   | Componente | Descripción |
-   | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+1. | Modelo (`Model`) y Acceso a Datos (`Retrofit`)    | Componente                                                                                                                                                                      | Descripción |
+   | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
    | Modelo de Datos (User.kt, Address.kt, Company.kt) | Clases de datos definidas para mapear la respuesta JSON de la API. Se implementa Parcelable en todas ellas para permitir el paso seguro de objetos entre Fragments (Safe Args). |
-   | API Service (ApiService.kt) | Interfaz de Retrofit que define los endpoints de la API, usando funciones suspend de Coroutines. |
-   | Repositorio (UserRepository.kt) | Centraliza el acceso a los datos (ApiService), encapsulando la lógica de la red. Ejecuta llamadas de I/O dentro de funciones suspend (Kotlin Coroutines). |
+   | API Service (ApiService.kt)                       | Interfaz de Retrofit que define los endpoints de la API, usando funciones suspend de Coroutines.                                                                                |
+   | Repositorio (UserRepository.kt)                   | Centraliza el acceso a los datos (ApiService), encapsulando la lógica de la red. Ejecuta llamadas de I/O dentro de funciones suspend (Kotlin Coroutines).                       |
 2. ViewModel (`UserViewModel.kt`)
 
 - Hereda de `ViewModel`.
@@ -92,6 +91,82 @@ El flujo de la aplicación se centra en la consulta y presentación de datos:
 
 ---
 
+## 🧩 Estrategia de Testeo (Anexo AE3-ABP1 - Testing en Android)
+
+Anexando los resultados del **_caso AE3-ABP1_**, se ha implementado una estrategia de testeo integral orientada a mantener comprobar funcionalidad, bajo acoplamiento y compatibilidad continua entre pruebas unitarias e instrumentadas, sin afectar el entorno de producción (sin romper el código).
+
+1. Objetivos principales
+
+- Asegurar la correcta funcionalidad de la capa de datos (repositorios y modelos).
+- Validar el comportamiento del ViewModel con respecto a los diferentes estados del flujo (Loading, Success, Error).
+- Verificar la integridad básica de la interfaz de usuario (UI) sin depender de servicios externos ni romper la ejecución normal del código de producción.
+- Mantener independencia entre pruebas unitarias e instrumentadas para facilitar la depuración y el mantenimiento.
+
+2. Tipos de pruebas
+
+   i. Pruebas Unitarias
+
+   - Ejecutan en la JVM local sin depender del entorno Android.
+   - Evalúan la lógica del negocio en clases como UserRepository y UserViewModel.
+   - Se apoyan en MockK para simular dependencias (UserService, UserRepository).
+   - Usan reglas y herramientas auxiliares:
+   - InstantTaskExecutorRule → fuerza la ejecución síncrona de LiveData.
+   - TestDispatcherRule → reemplaza el Dispatchers.Main por un TestDispatcher.
+   - getOrAwaitValue() → espera valores de LiveData de forma segura y sin bloqueos infinitos.
+   - Muestreo del test:
+
+```kotlin
+
+fun `fetchUsers debe actualizar userList a NetworkResult_Success`() = runTest {
+    coEvery { userRepository.getUsers() } returns NetworkResult.Success(mockUserList)
+    viewModel.fetchUsers()
+    val result = viewModel.userList.getOrAwaitValue()
+    assertTrue(result is NetworkResult.Success)
+}
+
+```
+
+    ii. Pruebas Instrumentadas
+
+    - Ejecutadas en entorno Android emulado.
+
+    - Validan que las vistas se inflen correctamente y que el fragmento inicialice sin errores.
+
+    - Usan el FragmentScenario (launchFragmentInContainer) de androidx.fragment:fragment-testing.
+
+    - Evitan dependencias con el backend, verificando únicamente el renderizado de la UI base.
+
+    - Muestreo del test:
+
+```kotlin
+
+@Test
+fun fragment_se_inicia_y_muestra_vistas_basicas() {
+launchFragmentInContainer<UsersListFragment>(
+themeResId = R.style.Theme_Ae2_abpro1_Listeylor
+)
+onView(withId(R.id.rv_users))
+.check(matches(isDisplayed()))
+}
+
+```
+
+3. Buenas prácticas aplicadas
+
+   i. Independencia total entre ambientes de producción y pruebas.
+
+   ii. No se sobreescriben versiones ni dependencias desde los archivos Gradle.
+
+   iii. Mocks controlados (con MockK) para evitar efectos colaterales.
+
+   iv. Sin uso de delays o Thread.sleep(), garantizando tiempos de ejecución estables.
+
+   v. Reglas de entorno limpias (InstantTaskExecutorRule, TestDispatcherRule) que restauran el estado tras cada test.
+
+   vi. Pueden ejecutarse múltiples veces sin producir resultados distintos.
+
+---
+
 ## ⭐ Capturas de Pantalla
 
 <table width="100%">
@@ -119,12 +194,28 @@ El flujo de la aplicación se centra en la consulta y presentación de datos:
             <img src="scrapbook/Detalle.png" alt="Detalle de usuarios" width="200"/>
         </td>
         <td align="center">
-            <img src="scrapbook/PERASCONMANZANAS.png" alt="Landing" width="200"/>
+            <img src="scrapbook/UsersListFragmentTest.png" alt="Test UsersListFragment" width="200"/>
         </td>
     </tr>
     <tr>
         <td align="center">Lista de usurios con datos básicos, incluye placeholder para una futura fotografía (la api no la incluye)</td>
         <td align="center">Detalle de un usuario</td>
+        <td align="center">Test clase UsersListFragment"</td>
+    </tr>
+    <tr>
+        <td align="center">
+            <img src="scrapbook/TestUserViewModelTest.png" alt="Test UserViewModel" width="200"/>
+        </td>
+        <td align="center">
+            <img src="scrapbook/UserRepositoryTest.png" alt="Test UserRepository" width="200"/>
+        </td>
+        <td align="center">
+            <img src="scrapbook/PERASCONMANZANAS.png" alt="Landing" width="200"/>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">Test UserViewModel</td>
+        <td align="center">Test UserRepository</td>
         <td align="center">Otro desarrollo de "Peras con Manzanas"</td>
     </tr>
 </table>

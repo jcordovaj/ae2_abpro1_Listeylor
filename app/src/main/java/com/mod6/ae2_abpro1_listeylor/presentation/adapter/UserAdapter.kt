@@ -43,7 +43,7 @@ class UserAdapter(private val onClick: (User) -> Unit) :
             tvEmail.text = user.email
 
             // Placeholder para la imagen (actualmente estático con ícono Peras con Manzanas)
-            // Se dejó el diseño para agregar, eventualmente, en otra etapa
+            // Se dejó el diseño para agregar foto del usuario, eventualmente, en otra etapa
             ivPlaceholder.setImageResource(R.drawable.user_placeholder)
 
             itemView.setOnClickListener {

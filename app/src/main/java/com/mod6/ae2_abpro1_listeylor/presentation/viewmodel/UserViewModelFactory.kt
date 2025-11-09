@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mod6.ae2_abpro1_listeylor.data.repository.UserRepository
 
-// Crear una instancia de UserViewModel con dependencias
+// Crea una instancia de UserViewModel con dependencias
 class UserViewModelFactory(private val repository: UserRepository) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

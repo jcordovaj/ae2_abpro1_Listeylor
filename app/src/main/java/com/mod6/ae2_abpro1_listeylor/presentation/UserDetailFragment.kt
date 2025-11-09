@@ -22,7 +22,7 @@ class UserDetailFragment : Fragment(R.layout.user_detail_fragment) {
         // Obtiene el objeto User
         val user = args.user
 
-        // Trae TODOS los detalles del usuario
+        // Trae todos los detalles del usuario
         displayUserDetails(user)
     }
 
