@@ -6,8 +6,6 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.0"
 }
 
-
-
 android {
     namespace  = "com.mod6.ae2_abpro1_listeylor"
     compileSdk = 36
@@ -18,16 +16,8 @@ android {
         targetSdk     = 36
         versionCode   = 1
         versionName   = "1.0"
-
-        // Usamos el Runner estándar, ya que eliminamos el CustomTestRunner
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-
     }
-
-    // ELIMINADO: Se eliminó el bloque sourceSets/jniLibs/resources, ya que
-    //            no se requiere para Mockito o Robolectric.
-    //            (Estaba causando problemas de configuración inútiles).
 
     buildFeatures {
         viewBinding = true
@@ -43,8 +33,6 @@ android {
             excludes += "META-INF/LICENSE-notice.md"
         }
     }
-
-    // ELIMINADO: Se eliminó el bloque testOptions{} con jvmArgs, ya que era para MockK/JVMTI.
 
     buildTypes {
         release {
@@ -86,7 +74,7 @@ configurations.all {
 }
 
 dependencies {
-    // --- IMPLEMENTATION (Consistente con libs) ---
+    // IMPLEMENTATION
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
