@@ -1,4 +1,4 @@
-# 🚀 MOD6 AE2-ABPRO1 + AE3-ABP1: Sistema de Consultas de Personal "Listeylor" (MVVM + ApiRest + Retrofit + Testing )
+# 🚀 Sistema de Consultas de Personal "Listeylor" (MVVM + ApiRest + Retrofit + Testing )
 
 <p float="center">
   <img src="scrapbook/perasconmanzanas_icon.png" alt="Logo" width="200"/>
